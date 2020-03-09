@@ -1,0 +1,57 @@
+--1--
+
+1.
+//capital
+
+2.
+//common
+
+3.
+//@area
+
+4.
+//*[@*]
+
+5.
+//official[ ../@lang = "fra" ]
+
+6.
+//native_name[2]/official
+
+7.
+sum(//country[infosContinent/continent = "Europe"]/@area)
+
+8.
+//name/official [not(contains(.,../common))]
+
+9.
+//country[name/common="France"]/borders/neighbour[last()]
+
+10.
+count(//country[name/common="France"]/preceding-sibling::*)+1
+
+11.
+
+-------
+
+
+
+--2--
+
+1-
+
+<!ELEMENT neighbour (#PCDATA)>
+
+<!ELEMENT continent (#PCDATA)>
+
+<!ELEMENT country (name,tld*,codes,currency*,callingCode*,
+                   capital,altSpellings+, infosContinent*,languages+,
+                   coordinates*,demonym,landlocked,borders*)>
+				   
+<!ATTLIST country
+  area CDATA #REQUIRED>
+
+2-
+<!ELEMENT country (name,tld*,codes,currency*,callingCode*,
+                   capital,altSpellings+, infosContinent+,languages+,
+                   coordinates?,demonym,landlocked,borders?)>
