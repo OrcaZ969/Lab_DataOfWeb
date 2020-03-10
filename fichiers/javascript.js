@@ -19,6 +19,27 @@ function chargerHttpXML(xmlDocumentUrl) {
     return httpAjax.responseXML;
 }
 
+function chargerHttpJSON(jsonDocumentUrl) {
+
+    var httpAjax;
+
+    httpAjax = window.XMLHttpRequest ?
+        new XMLHttpRequest() :
+        new ActiveXObject('Microsoft.XMLHTTP');
+
+    if (httpAjax.overrideMimeType) {
+        httpAjax.overrideMimeType('application/json');
+    }
+
+    // chargement du fichier JSON à l'aide de XMLHttpRequest synchrone (le 3° paramètre est défini à false)
+    httpAjax.open('GET', jsonDocumentUrl, false);
+    httpAjax.send();
+
+    var responseData = eval("(" + httpAjax.responseText + ")");
+
+    return responseData;
+}
+
 function modiferCouleur(){
 	document.body.style.backgroundColor = "cyan";
 	
@@ -122,6 +143,11 @@ function mouseOverHandler(){
 	drapeauImg.style.height="20px";
 	drapeauImg.src="http://www.geonames.org/flags/x/"+cca2.toLowerCase() + ".gif";
 	td_drapeau.appendChild(drapeauImg);
+	var td_monnaie=document.getElementById("td_monnaie");
+	var url = "https://restcountries.eu/rest/v2/alpha/"+ cca2.toLowerCase() +"?fields=currencies";
+	var reponse = chargerHttpJSON(url);
+	console.log(reponse.currencies[0].name);
+	td_monnaie.innerHTML = reponse.currencies[0].name;
 	this.style.fill="cyan";
 }
 
