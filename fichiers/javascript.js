@@ -167,8 +167,14 @@ function fillOptions(){
     // Création du document XML transformé par le XSL
     var newXmlDocument = xsltProcessor.transformToDocument(xmlDocument);
 	
-	var options=newXmlDocument.getElementsByTagName("option");
+	var options=newXmlDocument.getElementsByTagName("p");
 	var datalist=document.getElementById("id_datalist");
-	datalist.appendChild(options);
+	var arr = [...options];
+	for(var i=0;i<arr.length;i++){
+		var opt=document.createElement("option");
+		opt.value=arr[i].innerHTML
+		datalist.appendChild(opt);
+	}
+	
 }
 

@@ -1,44 +1,44 @@
 --1--
 
-1.
+1.toutes les capitales 
 //capital
 
-2.
+2.les noms communs (name/common) des pays
 //common
 
-3.
+3.la superficie de chaque pays
 //@area
 
-4.
+4.les éléments ayant au moins un attribut
 //*[@*]
 
-5.
+5.les noms officiels des pays exprimés français, pour ceux qui en ont
 //official[ ../@lang = "fra" ]
 
-6.
+6.les deuxièmes noms natifs officiels des pays
 //native_name[2]/official
 
-7.
+7.la somme des superficies (area) des pays d'Europe 
 sum(//country[infosContinent/continent = "Europe"]/@area)
 
-8.
+8.lles pays dont le nom commun n'est pas contenu dans leur nom officiel
 //name/official [not(contains(.,../common))]
 
-9.
+9.le dernier voisin de la France 
 //country[name/common="France"]/borders/neighbour[last()]
 
-10.
+10.la position de la France dans le document XML 
 count(//country[name/common="France"]/preceding-sibling::*)+1
 
-11.
-
+11.les langues des noms natifs des pays sans doublons 
+//native_name/@lang[not(.=preceding::native_name/@lang)]
 -------
 
 
 
 --2--
 
-1-
+1-L'instance countriesTP.xml ne correspond pas tout à fait à la DTD countries.dtd. Trouvez les élements qui sont mal déclarés et corrigez/complétez leurs déclarations dans la DTD. Donnez les définitions corrigées (utiliséz la fonction "Check this document" de EditX après avoir assigné la DTD au document xml ).
 
 <!ELEMENT neighbour (#PCDATA)>
 
@@ -51,7 +51,7 @@ count(//country[name/common="France"]/preceding-sibling::*)+1
 <!ATTLIST country
   area CDATA #REQUIRED>
 
-2-
+2-Certains élements enfants de l'élement country sont indiqués avec une occurrence minimale 0 alors qu'ils sont sont présents partout. Trouvez les et modifiez la DTD en conséquence. Donnez la définition modifiée de leurs éléments parent. 
 <!ELEMENT country (name,tld*,codes,currency*,callingCode*,
                    capital,altSpellings+, infosContinent+,languages+,
                    coordinates?,demonym,landlocked,borders?)>

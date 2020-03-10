@@ -6,7 +6,7 @@
 
 <xsl:template match="/">
 <xsl:for-each select="//country">
-	<option><xsl:value-of select="/codes/cca3"/></option>
+	<p><xsl:value-of select="codes/cca3"/></p>
 </xsl:for-each>
 </xsl:template>
 </xsl:stylesheet>
